@@ -12,8 +12,7 @@ GetShell        PROC
                 mov cx,8
                 mov di,OFFSET @@s_comspec
                 repe cmpsb
-                cmp cx,0
-                jne @@find
+                jnz @@find
                 lea di,d_shell
                 call CopyStr
                 pop ds

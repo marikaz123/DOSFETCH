@@ -92,7 +92,7 @@ GetDOSVersion         PROC
 @@_novell  DB 'Novell DOS ',NUL      ;EF
 @@_freedos DB 'FreeDOS ',NUL         ;FD
 @@_msdos   DB 'MS-DOS ',NUL          ;FF
-@@_dosbox  DB 'DOSBox ',NUL
+@@_dosbox  DB 'DOSBox or clone ',NUL
 @@_other   DB 'MS-DOS clone ',NUL
 
 GetDOSVersion         ENDP
@@ -154,8 +154,9 @@ PrintVersion          ENDP
                       mov cx,0
                       int 21h
                       jc @@nbox
-                      cmp WORD PTR cs:[DTA+1ah],14h
-                      jne @@nbox
+                      cmp WORD PTR cs:[DTA+1ah],30 ;? dosbox 20, dodbox-x 21
+                      ;jne @@nbox
+                      ja @@nbox
                       pop ax
                       stc
                       ret
@@ -163,5 +164,5 @@ PrintVersion          ENDP
                       pop ax
                       clc
                       ret
-@@fdbox DB 'Z:\MOUNT.COM',NUL
+@@fdbox DB 'Z:\COMMAND.COM',NUL
 @CheckDOSBox          ENDP

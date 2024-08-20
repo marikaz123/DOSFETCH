@@ -50,11 +50,14 @@ GetFloppy       PROC
                 mov WORD PTR [di],' ,'
                 add di,2
      @@noComma:
+                add @@dm,1
                 mov si,OFFSET @@db
                 call CopyStr
                 call @SelDisk
                 call CopyStr
          @@eop:
+                cmp @@dm,0
+                je @@noFloppy  ;?!
                 ret
     @@noFloppy:
                 mov si,OFFSET s_nop

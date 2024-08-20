@@ -34,7 +34,7 @@ TEXTC = GRE ;text color
 
 EQREC RECORD drv:2,vid:2,ram:2,n:1,d:1
 
-
+;----------------------------------------------------------- PROG -----------
 .MODEL TINY
 .CODE
 
@@ -342,7 +342,7 @@ vidMsg   DB 'DOSFETCH needs 80-column color video adaptor.',CR,LF,EOS
 verMsg   DB 'DOSFETCH requires DOS version 3.0 or later.',CR,LF,EOS
 infMsg   DB "DOSFETCH v1.0 ** marikaz **",CR,LF
          DB 'Determining the correct OEM name and version of the system is very complicated,',CR,LF
-         DB 'so the information provided in the DOS field may be imprecise or incorrect.',CR,LF,EOS
+         DB "so the information provided in the 'DOS' field may be incorrect.",CR,LF,EOS
 
 eqList   EQREC <?,?,?,?,?>
 oem      DB ?
