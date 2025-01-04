@@ -1,12 +1,10 @@
-;   GetFPU:PROC * REV. A
-;GetFloppy:PROC * REV. A
+;   GetFPU:PROC * REV. A1
+;GetFloppy:PROC * REV. A1
 
 GetFPU          PROC
                 LOCALS
                 mov di,OFFSET d_fpu
-                mov al,eqList
-                and al,MASK n
-                or al,al
+                test eqList,MASK n
                 jz @@noFPU
                 mov si,OFFSET s_p
                 call CopyStr
@@ -20,8 +18,7 @@ GetFPU          ENDP
 GetFloppy       PROC
                 LOCALS
                 mov di,OFFSET d_Floppy
-                mov al,eqList
-                and al,MASK d
+                test eqList,MASK d
                 jz @@noFloppy
 
                 mov al,10h
@@ -95,8 +92,8 @@ GetFloppy       ENDP
                 mov si,OFFSET s_na
                 ret
 
-@@d1 DB '[360K]',NUL
-@@d2 DB '[1.2M]',NUL
-@@d3 DB '[720K]',NUL
-@@d4 DB '[1.44M]',NUL
+@@d1 DB '(360K)',NUL
+@@d2 DB '(1.2M)',NUL
+@@d3 DB '(720K)',NUL
+@@d4 DB '(1.44M)',NUL
 @SelDisk        ENDP

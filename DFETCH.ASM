@@ -27,6 +27,7 @@ SPACE = 20h
 EOS   = '$'
 TRM   = -1
 DTA   = 80h
+SEP   = 2Ch ;thousand separator
 
 ;INFO FORM
 HEADC = WHI ;heading color
@@ -38,7 +39,6 @@ EQREC RECORD drv:2,vid:2,ram:2,n:1,d:1
 .MODEL TINY
 .CODE
 
-.8086
 JUMPS
 
 ORG 100h
@@ -97,8 +97,8 @@ begin:
 
                 add ax,(80+46)*2
                 mov iPos,ax
-
                 cld
+
                 call GetDOSversion
                 call GetCPU
                 call GetFPU
@@ -225,8 +225,11 @@ Long2dec        PROC
                 LOCALS
                 push bx
                 push cx
+                push si
                 push di
-                add di,9
+                add di,9+3
+                mov si,di ; \
+                sub si,3  ;    1. sep.
                 push di
           @@do:
                 mov cx,ax
@@ -247,12 +250,27 @@ Long2dec        PROC
                 mov dx,bx
                 dec di
                 or dx,dx
+                je @@ax
+                cmp si,di
                 jne @@do
+                mov BYTE PTR [di],SEP
+                dec di
+                sub si,4     ;next sep.
+                jmp @@do
+        @@ax:
                 or ax,ax
+                je @@eos
+                cmp si,di
                 jne @@do
+                mov BYTE PTR [di],SEP
+                dec di
+                sub si,4
+                jmp @@do
+         @@eos:
                 pop ax
                 sub ax,di
                 pop di
+                pop si
                 pop cx
                 pop bx
                 ret

@@ -71,7 +71,7 @@ DB 44 DUP (?),NUL
 DB 44 DUP (?),NUL
 DB 44 DUP (?),NUL
 DB 44 DUP (?),NUL
-DB '                  DOSBox'NUL
+DB '                  DOSBox',NUL
 DB 44 DUP (?),NUL
 DB 44 DUP (?),NUL
 DB 44 DUP (?),NUL

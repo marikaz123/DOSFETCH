@@ -15,7 +15,7 @@ GetHDDFreeSpace PROC
                 rcr ax,1      ;  . DX:AX div 2
                 call Long2dec
                 mov si,di
-                add si,10
+                add si,13 ; sep
                 sub si,ax
                 mov cx,ax
                 rep movsb

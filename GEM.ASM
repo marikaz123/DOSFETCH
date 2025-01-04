@@ -21,7 +21,7 @@ GetBaseMemory   PROC
                 mov dx,0
                 call Long2dec
                 mov si,di
-                add si,10
+                add si,13 ;sep.
                 sub si,ax
                 mov cx,ax
                 rep movsb
@@ -52,7 +52,7 @@ GetExtMemory    PROC
                 mov dx,0
                 call Long2dec
                 mov si,di
-                add si,10
+                add si,13
                 sub si,ax
                 mov cx,ax
                 rep movsb
